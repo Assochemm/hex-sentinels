@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A0E14">
+<meta name="description" content="HEX SENTINELS Group 6: ratiba ya discussion, ramani na njia za kufika Postgraduate Building (PG), IAA.">
+<title>HEX SENTINELS · Group 6 · Mission Control</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0E14;--p:#111823;--l:#1F2B3A;--t:#D7E0EA;--m:#8A97A8;--g:#00FF9C;--r:#FF3B5C;--s:#C0C0C0;--c:#5CC8FF;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(800px 480px at 85% -8%,#16243a,transparent),var(--bg);color:var(--t);font:15px/1.6 "Share Tech Mono",ui-monospace,"Courier New",monospace}
+main{max-width:760px;margin:0 auto;padding:max(22px,env(safe-area-inset-top)) 16px max(48px,env(safe-area-inset-bottom))}
+h1,h2,.o{font-family:Orbitron,"Arial Black",Impact,sans-serif}
+h1{font-size:clamp(30px,9vw,56px);font-weight:800;margin:0;color:var(--s);letter-spacing:.04em;line-height:1.05;animation:rev 1.2s steps(20) both}
+h1 b{color:var(--r);font-weight:800}
+@keyframes rev{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.tag{color:var(--m);margin:8px 0 22px}
+h2{font-size:16px;font-weight:600;color:var(--g);letter-spacing:.06em;margin:36px 0 12px}
+.card{background:var(--p);border:1px solid var(--l);padding:14px 16px}
+.clock{border-color:var(--g);position:relative;overflow:hidden}
+.clock::after{content:"";position:absolute;left:0;right:0;top:0;height:40%;background:linear-gradient(transparent,rgba(0,255,156,.08),transparent);animation:scan 4s linear infinite;pointer-events:none}
+@keyframes scan{from{transform:translateY(-100%)}to{transform:translateY(300%)}}
+#st{font-size:13px;color:var(--m)}
+#nm{font-size:20px;margin:2px 0 0}
+#cd{font-size:clamp(28px,9vw,44px);color:var(--g);font-weight:800}
+.pb{height:8px;background:var(--l);margin-top:12px}
+.pb i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--g),var(--c));transition:width 1s linear}
+.pc{border:1px solid var(--r);border-left-width:6px;background:var(--p);padding:12px 14px;margin:16px 0 0}
+.pc b{color:var(--r)}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}
+button{font:inherit;color:var(--t);background:var(--p);border:1px solid var(--l);padding:8px 14px;cursor:pointer;min-height:42px}
+button[aria-pressed=true]{border-color:var(--g);color:var(--g)}
+button:focus-visible,summary:focus-visible{outline:2px solid var(--c);outline-offset:2px}
+.mapw{overflow-x:auto;border:1px solid var(--l)}
+.mapw>div{min-width:600px}
+.mapw svg{display:block;width:100%;height:auto}
+.route{animation:dash 1s linear infinite;transition:opacity .3s}
+@keyframes dash{to{stroke-dashoffset:-28}}
+.dir{margin-top:10px}
+.dir b.a{color:var(--g)}
+.dir b.b{color:var(--c)}
+.tl{list-style:none;margin:0;padding:0 0 0 14px;border-left:2px solid var(--l)}
+.tl li{position:relative;padding:0 0 12px 16px}
+.tl li::before{content:"";position:absolute;left:-21px;top:12px;width:12px;height:12px;background:var(--g)}
+.tl li.b::before{background:var(--r)}
+.tl li.now::before{animation:pl 1.6s infinite}
+@keyframes pl{0%{box-shadow:0 0 0 0 rgba(0,255,156,.7)}70%,100%{box-shadow:0 0 0 12px transparent}}
+.tl li.now .card{border-color:var(--g)}
+.tl li.done{opacity:.45}
+summary{cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+.tm{display:block;font-size:13px;color:var(--m)}
+.card p{margin:8px 0 0}
+.r{margin:0;padding-left:18px}
+.q{border-top:1px solid var(--l);margin:36px 0 0;padding-top:18px;color:var(--s);font-size:17px}
+.q b{color:var(--g)}
+footer{color:var(--m);font-size:12px;margin-top:24px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<h1>HEX <b>SENTINELS</b></h1>
+<p class="tag">Group 6 · Mission Control · Discussion ya masaa 3, 11:30 AM hadi 2:30 PM</p>
+
+<section class="card clock" aria-live="polite">
+<div id="st">…</div><div id="nm" class="o"></div><div id="cd">--:--:--</div>
+<div class="pb"><i id="pg"></i></div>
+</section>
+<div class="pc"><b>Aliye na PC aje nayo.</b> Windows na Database ni practical tupu. Usiye na PC, kaa pamoja na mwenye nayo.</div>
+
+<h2>MAHALI: POSTGRADUATE BUILDING (PG)</h2>
+<div class="btns" role="group" aria-label="Chagua njia">
+<button data-r="all" aria-pressed="true">Njia zote</button>
+<button data-r="1" aria-pressed="false">Njia 1 · Main Gate</button>
+<button data-r="2" aria-pressed="false">Njia 2 · Mini Gate</button>
+</div>
+<div class="mapw"><div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" font-family="'Share Tech Mono',monospace" font-size="13" role="img" aria-label="Ramani ya IAA: Postgraduate Building (PG)">
+<defs><filter id="g" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#00FF9C"/></marker>
+<marker id="b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#5CC8FF"/></marker></defs>
+<rect width="800" height="450" fill="#0A0E14"/>
+<path d="M0 75H800M0 150H800M0 225H800M0 300H800M0 375H800M100 0V450M200 0V450M300 0V450M400 0V450M500 0V450M600 0V450M700 0V450" stroke="#111B27"/>
+<g fill="none" stroke="#243447" stroke-linecap="round" stroke-linejoin="round"><path d="M87 0L9 416" stroke-width="20"/><path d="M87 69L345 64L560 62Q612 66 612 98" stroke-width="12"/><path d="M385 62Q440 120 520 200L580 262L600 300" stroke-width="12"/><path d="M156 355L420 372L800 372" stroke-width="12"/></g>
+<rect x="150" y="215" width="230" height="130" rx="6" fill="#0F2A1E" stroke="#1D5A3E"/><text x="265" y="285" fill="#3E8E6B" text-anchor="middle">IAA GROUND</text><text x="172" y="245" fill="#3E8E6B">N ↑</text>
+<rect x="30" y="255" width="150" height="160" fill="#151C27" stroke="#243447"/><text x="105" y="340" fill="#6B7A8C" text-anchor="middle">New Hostel Blocks</text>
+<rect x="268" y="130" width="31" height="43" fill="#243447"/><text x="283" y="190" fill="#6B7A8C" text-anchor="middle" font-size="11">Hostels</text>
+<rect x="446" y="95" width="34" height="44" fill="#E0B100"/><text x="463" y="156" fill="#E0B100" text-anchor="middle" font-size="11">Cafeteria</text>
+<rect x="567" y="56" width="52" height="44" fill="#2F6FB5"/><text x="593" y="46" fill="#7FB2E8" text-anchor="middle" font-size="11">Admin</text>
+<rect x="675" y="121" width="65" height="48" fill="#3E8E52"/><text x="707" y="184" fill="#6FC287" text-anchor="middle" font-size="11">Library</text>
+<rect x="684" y="186" width="61" height="26" fill="#D9822B"/><rect x="688" y="227" width="58" height="17" fill="#167D7A"/><rect x="693" y="260" width="53" height="36" fill="#167D7A"/><text x="720" y="312" fill="#3FB8B3" text-anchor="middle" font-size="11">Nyangumi</text>
+<polygon points="588,220 604,229 604,247 588,256 572,247 572,229" fill="#2F6FB5"/><text x="588" y="242" fill="#fff" text-anchor="middle" font-size="11">LT</text>
+<rect x="437" y="251" width="82" height="26" fill="#8E3B3B"/><text x="478" y="269" fill="#fff" text-anchor="middle" font-size="11">IAA Hostel</text>
+<rect x="474" y="306" width="43" height="13" fill="#2F6FB5"/><rect x="502" y="325" width="61" height="43" fill="#7A3FA8"/><text x="532" y="351" fill="#fff" text-anchor="middle" font-size="11">LH</text>
+<rect x="398" y="320" width="32" height="51" fill="#8B5E3C"/><text x="414" y="388" fill="#C79A74" text-anchor="middle" font-size="11">Kwa Ras</text>
+<rect x="632" y="279" width="26" height="20" fill="#167D7A"/><rect x="589" y="303" width="60" height="35" fill="#167D7A"/><text x="619" y="354" fill="#3FB8B3" text-anchor="middle" font-size="11">PAPA / CH</text>
+<circle cx="346" cy="138" r="56" fill="none" stroke="#FF3B5C" stroke-width="2"><animate attributeName="r" values="52;78;52" dur="2.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;.1;1" dur="2.6s" repeatCount="indefinite"/></circle>
+<rect x="316" y="95" width="61" height="87" fill="#FF3B5C" filter="url(#g)"/><text x="346" y="146" fill="#fff" text-anchor="middle" font-size="26" font-weight="bold">PG</text><text x="346" y="204" fill="#FF3B5C" text-anchor="middle">Postgraduate Building</text><text x="346" y="36" fill="#FF3B5C" text-anchor="middle" font-size="15" font-weight="bold">▼ TUKUTANE HAPA ▼</text>
+<path class="route r1" d="M87 69L346 66L346 90" fill="none" stroke="#00FF9C" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#a)"/>
+<path class="route r2" d="M576 372L585 320L578 262L520 205L440 130L392 74L362 94" fill="none" stroke="#5CC8FF" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#b)"/>
+<circle cx="87" cy="69" r="7" fill="#00FF9C"/><text x="100" y="52" fill="#00FF9C" font-weight="bold">MAIN GATE</text><text x="180" y="58" fill="#00FF9C">Njia 1</text>
+<circle cx="576" cy="372" r="7" fill="#5CC8FF"/><text x="576" y="404" fill="#5CC8FF" text-anchor="middle" font-weight="bold">MINI GATE</text><text x="600" y="330" fill="#5CC8FF">Njia 2</text>
+<text transform="rotate(-79 46 250)" x="46" y="250" fill="#6B7A8C" text-anchor="middle">NJIRO RD</text>
+<text x="20" y="26" fill="#C0C0C0" font-size="16" font-weight="bold">IAA CAMPUS · MWONGOZO WA PG</text>
+<text x="780" y="438" fill="#6B7A8C" text-anchor="end" font-size="11">Ramani ya muhtasari, si kwa kipimo</text>
+</svg>
+</div></div>
+<div class="card dir"><b class="a">Njia 1 · Main Gate (Njiro Rd):</b> ingia Main Gate, fuata barabara ya juu kuelekea mashariki hadi Postgraduate Building, jengo la bluu.<br><br><b class="b">Njia 2 · Mini Gate:</b> ingia Mini Gate upande wa kusini karibu na Lecture Hall, fuata barabara ya kati kuelekea kaskazini-magharibi hadi PG.<br><br>Chumba (PG 1–18) kitatangazwa. Ramani ni ya muhtasari, si kwa kipimo.</div>
+
+<h2>RATIBA YA LEO</h2>
+<ul class="tl" id="plan"></ul>
+
+<h2>SHERIA ZA KUDHIBITI MUDA</h2>
+<div class="card"><ul class="r">
+<li>Timekeeper mmoja anapiga kengele kila block inapoisha.</li>
+<li>Swali moja haliwezi kuzidi dakika 5. Likiendelea, linaingia kwenye “parking lot” mwishoni.</li>
+<li>Simu silent. Ukikwama, uliza wenzako wawili kabla ya kuuliza kiongozi.</li>
+<li>Scribe mmoja anaandika muhtasari wa kila block kwenye daftari. Wakubwa tutoe JERO TU.</li>
+</ul></div>
+
+<p class="q"><b>“</b>5.0 GPA haitoki kwa bahati. Inatoka kwa jasho, nidhamu na usiku mrefu. Hakuna kubaki nyuma, tupigane pamoja!<b>”</b></p>
+<footer>HEX SENTINELS · Group 6 · IAA</footer>
+</main>
+<script>
+const EVENT_DATE=""; // weka tarehe ya kikao, mfano "2026-11-14". Tupu = kila siku saa za kikao
+const B=[
+[690,700,"Kickoff","Roll call, sheria, JERO ya daftari, PC ziwashwe.","k"],
+[700,750,"Boolean Algebra","Combinations of Gates (15) · Laws of Algebra Propositions (15) · Karnaugh Maps (20). Tunaanza na kigumu ubongo ukiwa fresh.","t"],
+[750,760,"Break 1","Nyoosha mwili, kunywa maji. Joke: programmer alikwama bafuni, shampoo inasema “paka, osha, rudia”. Infinite loop!","b"],
+[760,805,"Database","Theory (20): tables, keys, relationships. Practical (25): tengeneza table, ingiza data, fanya query kwenye PC.","t"],
+[805,820,"Break 2","Chakula na sala. Joke: kwa nini mwanafunzi wa logic hachelewi? Kwa sababu yeye ni 1, si 0.","b"],
+[820,860,"Windows Mastery","Practical: shortcuts, File Explorer, Task Manager, CMD (ipconfig, dir, ping), users na permissions, Defender na Firewall. Lengo: tayari kwa field ya cybersecurity.","t"],
+[860,870,"Story kwa mbali na wrap-up","Hadithi ya kufunga, muhtasari, kazi za nyumbani, tarehe ya discussion ijayo.","k"]];
+const p2=n=>String(n).padStart(2,"0");
+const f=m=>(Math.floor(m/60)%12||12)+":"+p2(m%60);
+const hms=s=>p2(Math.floor(s/3600))+":"+p2(Math.floor(s%3600/60))+":"+p2(s%60);
+const pl=document.getElementById("plan");
+B.forEach(([s,e,n,d,k])=>pl.insertAdjacentHTML("beforeend",`<li class="${k=="b"?"b":""}"><details class="card"><summary><span class="tm">${f(s)} – ${f(e)} · dakika ${e-s}</span><b class="o">${n}</b></summary><p>${d}</p></details></li>`));
+const lis=[...pl.children],$=id=>document.getElementById(id);
+function tick(){
+const d=new Date(new Date().toLocaleString("en-US",{timeZone:"Africa/Dar_es_Salaam"}));
+const ds=d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate());
+const ts=d.getHours()*3600+d.getMinutes()*60+d.getSeconds(),S=690*60,E=870*60;
+let st,nm,cd,pg=0,cur=-1;
+if(EVENT_DATE&&ds!==EVENT_DATE){st="KIKAO KINAFUATA";nm=EVENT_DATE;cd="11:30 AM"}
+else if(ts<S){st="KIKAO KINAANZA KATIKA";nm="Tuwahi, PC ziwashwe";cd=hms(S-ts)}
+else if(ts<E){cur=B.findIndex(b=>ts>=b[0]*60&&ts<b[1]*60);st="SASA HIVI";nm=B[cur][2];cd=hms(B[cur][1]*60-ts);pg=(ts-S)/(E-S)*100}
+else{st="KIKAO KIMEISHA";nm="Asanteni wote. 5.0 GPA ni yetu.";cd="00:00:00";pg=100}
+$("st").textContent=st;$("nm").textContent=nm;$("cd").textContent=cd;$("pg").style.width=pg+"%";
+const over=ts>=E&&(!EVENT_DATE||ds===EVENT_DATE);
+lis.forEach((li,i)=>{li.classList.toggle("now",i===cur);li.classList.toggle("done",over||(cur>-1&&i<cur))});
+}
+tick();setInterval(tick,1000);
+document.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{
+document.querySelectorAll("[data-r]").forEach(x=>x.setAttribute("aria-pressed",x===b));
+const v=b.dataset.r;
+document.querySelectorAll(".route").forEach(p=>p.style.opacity=(v=="all"||p.classList.contains("r"+v))?1:.08)});
+if(matchMedia("(prefers-reduced-motion: reduce)").matches)document.querySelectorAll("animate").forEach(a=>a.remove());
+</script>
+</body>
+</html>
